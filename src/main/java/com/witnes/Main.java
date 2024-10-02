@@ -8,7 +8,7 @@ import java.util.List;
 
 @SpringBootApplication
 @RestController
-@RequestMapping("api/v1/customers")
+@RequestMapping("api/v1/customers") // Updated to remove hardcoded ID
 public class Main {
 
     private final CustomerRepository customerRepository;
@@ -40,5 +40,11 @@ public class Main {
         customer.setEmail(request.email);
         customer.setAge(request.age);
         customerRepository.save(customer);
+    }
+
+    // Updated deleteCustomer method
+    @DeleteMapping("/{customerId}") // Use PathVariable for dynamic customer ID
+    public void deleteCustomer(@PathVariable Integer customerId) {
+        customerRepository.deleteById(Long.valueOf(customerId));
     }
 }
