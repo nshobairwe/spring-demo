@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+
 import java.util.Objects;
 
 @Entity
@@ -12,19 +13,19 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id; // Changed to Long
+
     private String name;
+
     private String email;
+
     private Integer age;
 
-    public Customer(Integer id, String name, String email, Integer age) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.age = age;
+    // No-args constructor
+    public Customer() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -40,7 +41,7 @@ public class Customer {
         return age;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) { // Change from Integer to Long
         this.id = id;
     }
 

@@ -2,13 +2,11 @@ package com.witnes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@SpringBootApplication // Use @SpringBootApplication instead of @EnableAutoConfiguration, @ComponentScan, and @Configuration
+@SpringBootApplication
 @RestController
 @RequestMapping("api/v1/customers")
 public class Main {
@@ -21,11 +19,26 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args); // Correctly start the Spring application
+        SpringApplication.run(Main.class, args);
     }
 
     @GetMapping
     public List<Customer> getCustomer() {
         return customerRepository.findAll(); // Retrieve actual customers from the repository
+    }
+
+    record NewCustomerRequest(
+            String name,
+            String email,
+            Integer age
+    ) {}
+
+    @PostMapping
+    public void addCustomer(@RequestBody NewCustomerRequest request) {
+        Customer customer = new Customer();
+        customer.setName(request.name);
+        customer.setEmail(request.email);
+        customer.setAge(request.age);
+        customerRepository.save(customer);
     }
 }
