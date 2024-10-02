@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Customer {
+public class CustomerModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class Customer {
     private Integer age;
 
     // No-args constructor
-    public Customer() {
+    public CustomerModel() {
     }
 
     public Long getId() {
@@ -61,7 +61,7 @@ public class Customer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
+        CustomerModel customer = (CustomerModel) o;
         return Objects.equals(id, customer.id) && Objects.equals(name, customer.name) && Objects.equals(email, customer.email) && Objects.equals(age, customer.age);
     }
 
